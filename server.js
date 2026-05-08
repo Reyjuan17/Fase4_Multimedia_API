@@ -1,14 +1,12 @@
 const express = require('express');
-require('dotenv').config(); // Cargamos variables antes que nada
+require('dotenv').config();
 const conectarDB = require('./config/db');
-
+const productosRoutes = require('./routes/productos');
 const app = express();
-
-// Conectar a la base de datos
+app.use(express.json());
 conectarDB();
-
+app.use('/productos', productosRoutes);
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
